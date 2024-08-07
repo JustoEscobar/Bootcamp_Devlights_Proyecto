@@ -1,4 +1,4 @@
-// Rutas para usuarios
+// Rutas para productos
 import express, { Request, Response } from "express";
 import { userController } from "../controllers/userController";
 

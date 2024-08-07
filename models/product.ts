@@ -1,37 +1,28 @@
 import { Schema, model } from "mongoose";
 
-const UserSchema = new Schema({
-    first_name: {
+const ProductSchema = new Schema({
+    name: {
         type: String,
         required: true,
     },
-    last_name: {
+    description: {
         type: String,
         required: true,
     },
-    username: {
-        type: String,
+    price: {
+        type: Number,
         required: true,
-        unique: true,
-    },    
-    email: {
-        type: String,
-        required: true,
-        match: [
-        /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/,"Please fill a valid email address",
-        ],
-        unique: true,
     },
-    password: {
+    category: {
         type: String,
         required: true,
     },
-    is_admin: {
-        type: Boolean,
-        default: false,
+    stock:{
+        type: Number,
+        required: true,
     },
 });
 
-const User = model("User", UserSchema);
+const Product = model("Product", ProductSchema);
 
-export default User;
+export default Product;

@@ -1,21 +1,13 @@
 // Rutas para productos
 import express, { Request, Response } from "express";
-import { userController } from "../controllers/userController";
+import { productController } from "../controllers/productController";
 
-const usersRouter = express.Router();
+const productsRouter = express.Router();
 
-usersRouter.get("/getUsers", userController.getUsers);
+productsRouter.get("/getProducts", productController.getProducts);
+productsRouter.get("/getProduct/:id", productController.getProduct);
+productsRouter.post("/create-product", productController.createProduct);
+productsRouter.delete("/delete-product/:id", productController.deleteProduct);
+productsRouter.put("/update-product/:id", productController.updateProduct);
 
-usersRouter.get("/user-data", (req: Request, res: Response) => {
-    res.send("User Data");
-});
-
-usersRouter.get("/user-settings", (req: Request, res: Response) => {
-    res.send("User Settings");
-});
-
-usersRouter.post("/create-user", userController.createUser);
-
-usersRouter.delete("/delete-user/:id", userController.deleteUser);
-
-export default usersRouter;
+export default productsRouter;

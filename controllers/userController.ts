@@ -3,15 +3,6 @@ import User from "../models/user";
 
 class UserController {
 
-  async createUser(req: Request, res: Response) {
-    try {
-      const newUser = User.create(req.body);
-      return res.status(201).json(newUser);
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
   async getUsers(req: Request, res: Response) {
     try {
       const users = await User.find();

@@ -1,10 +1,7 @@
 import express from "express";
-import usersRouter from "./routes/user";
-import adminRouter from "./routes/admin";
-import productsRouter from "./routes/product";
-
-import dbConnect from "./db/dbConnect";
 import { config } from "dotenv";
+import dbConnect from "./db/dbConnect";
+import { authRouter, userRouter, adminRouter, productRouter } from "./routes";
 
 config();
 
@@ -15,9 +12,10 @@ const app = express();
 
 app.use(express.json());
 
-app.use("/user", usersRouter);
+app.use("/user", userRouter);
+app.use("/auth", authRouter);
 app.use("/admin", adminRouter);
-app.use("/product", productsRouter);
+app.use("/product", productRouter);
 
 dbConnect();
 

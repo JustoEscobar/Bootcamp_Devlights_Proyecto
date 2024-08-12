@@ -2,12 +2,12 @@
 import express, { Request, Response } from "express";
 import { productController } from "../controllers/productController";
 
-const productsRouter = express.Router();
+const productRouter = express.Router();
 
-productsRouter.get("/getProducts", productController.getProducts);
-productsRouter.get("/getProduct/:id", productController.getProduct);
-productsRouter.post("/create-product", productController.createProduct);
-productsRouter.delete("/delete-product/:id", productController.deleteProduct);
-productsRouter.put("/update-product/:id", productController.updateProduct);
+productRouter.get("/getProducts", productController.getProducts);
+productRouter.get("/getProduct/:id", productController.getProduct);
+productRouter.post("/create-product", productController.createProduct);
+productRouter.delete("/delete-product/:id", productController.deleteProduct);
+productRouter.put("/update-product/:id", productController.updateProduct);
 
-export default productsRouter;
+export default productRouter;

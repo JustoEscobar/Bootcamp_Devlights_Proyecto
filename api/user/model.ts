@@ -1,7 +1,7 @@
 import { Schema, model } from "mongoose";
-import bcrypt from "bcrypt"
+import bcrypt from "bcrypt";
 
-const UserSchema = new Schema({
+const userSchema = new Schema({
   first_name: {
     type: String,
     required: true,
@@ -13,30 +13,36 @@ const UserSchema = new Schema({
   username: {
     type: String,
     required: true,
-    unique: true,
   },
   email: {
     type: String,
     required: true,
     match: [
-      /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/,
+      /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
       "Please fill a valid email address",
     ],
-    unique: true,
   },
   password: {
     type: String,
     required: true,
   },
-  is_admin: {
-    type: Boolean,
-    default: false,
+  role: {
+    type: String,
+    enum: ["admin", "comprador", "vendedor" ],
+    default: "comprador",
+  },
+  avatar: {
+    type: String,
+    default: "",
   },
 });
 
-UserSchema.pre("save", async function (next) {
+userSchema.pre('save', async function (next) {
+  if (!this.isModified('password')) {
+    return next();
+  }
   try {
-    const hashedPassword = await bcrypt.hash(this.password ?? "", 10);
+    const hashedPassword = await bcrypt.hash(this.password, 10);
     this.password = hashedPassword;
     next();
   } catch (error) {
@@ -44,6 +50,6 @@ UserSchema.pre("save", async function (next) {
   }
 });
 
-const User = model("User", UserSchema);
+const User = model("User", userSchema);
 
 export default User;

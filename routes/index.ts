@@ -1,4 +1,13 @@
-export { default as authRouter } from "./auth";
-export { default as userRouter } from "./user";
-export { default as adminRouter } from "./admin";
-export { default as productRouter} from "./product";
+import express from "express";
+
+import userRouter from "../api/user/routes";
+import productRouter from "../api/product/routes";
+import categoryRouter from "../api/category/routes";
+
+const router = express.Router();
+
+router.use("/users", userRouter);
+router.use("/products", productRouter);
+router.use("/categories", categoryRouter);
+
+export default router;
